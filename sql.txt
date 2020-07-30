@@ -3,6 +3,5 @@ SELECT DISTINCT iata, avg(ArrDelay) as prom_arribades, avg(DepDelay) as prom_sor
 SELECT iata, colYear, colMonth, ArrDelay * 1.0000 as prom_arribades FROM airports INNER JOIN flights ON iata = origin ORDER BY IATA, colYear;
 SELECT city, colYear, colMonth, ArrDelay * 1.0000 as prom_arribades FROM airports INNER JOIN flights ON iata = origin ORDER BY city, colYear;
 SELECT Code, colYear,colMonth, sum(cancelled) FROM carriers INNER JOIN flights on Code = UniqueCarrier where cancelled!=0 GROUP BY Code, ColYear order by sum(cancelled) Desc; 
-SELECT DISTINCT TailNum, sum(Distance) as totalDistance FROM flights WHERE TailNum not like "" GROUP BY TailNum order by sum(Distance) Desc LIMIT 10;SELECT DISTINCT TailNum, sum(Distance) as totalDistance FROM flights WHERE TailNum not like "" GROUP BY TailNum order by sum(Distance) Desc LIMIT 10;
-
-SELECT Code, avg(ArrDelay) as Delay FROM carriers INNER JOIN flights on Code = UniqueCarrier GROUP BY Code order by Delay  desc;  (aunque yo quería poner : SELECT Code, avg(ArrDelay) as Delay FROM carriers INNER JOIN flights on Code = UniqueCarrier WHERE Delay > 10.0000 GROUP BY Code order by Delay  desc; )
+SELECT DISTINCT TailNum, sum(Distance) as totalDistance FROM flights WHERE TailNum not like "" GROUP BY TailNum order by sum(Distance) Desc LIMIT 10
+SELECT Code, avg(ArrDelay) as Delay FROM carriers INNER JOIN flights on Code = UniqueCarrier GROUP BY Code Having Delay > 10 order by Delay  desc; 
